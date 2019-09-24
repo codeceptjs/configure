@@ -1,0 +1,28 @@
+{
+  "name": "@codeceptjs/configure",
+  "version": "1.0.0",
+  "description": "Set of CodeceptJS config hooks to simplify configuration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codecept-js/configure.git"
+  },
+  "keywords": [
+    "codeceptjs"
+  ],
+  "peerDependencies": {
+    "codeceptjs": "^2.3.3"
+  },
+  "author": "Michael Bodnarchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codecept-js/configure/issues"
+  },
+  "homepage": "https://github.com/codecept-js/configure#readme",
+  "dependencies": {
+    "lodash.merge": "^4.6.2"
+  }
+}

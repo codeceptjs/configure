@@ -1,10 +1,11 @@
 {
   "name": "@codeceptjs/configure",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Set of CodeceptJS config hooks to simplify configuration",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha index_test.js",
+    "publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",
@@ -14,7 +15,7 @@
     "codeceptjs"
   ],
   "peerDependencies": {
-    "codeceptjs": "^2.3.3"
+    "codeceptjs": "codeception/codeceptjs"
   },
   "author": "Michael Bodnarchuk",
   "license": "ISC",
@@ -23,6 +24,11 @@
   },
   "homepage": "https://github.com/codecept-js/configure#readme",
   "dependencies": {
+    "codeceptjs": "github:codeception/codeceptjs",
     "lodash.merge": "^4.6.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
   }
 }

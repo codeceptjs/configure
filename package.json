@@ -4,7 +4,7 @@
   "description": "Set of CodeceptJS config hooks to simplify configuration",
   "main": "index.js",
   "scripts": {
-    "test": "mocha index_test.js",
+    "test": "mocha test/",
     "publish": "npm publish --access public"
   },
   "repository": {

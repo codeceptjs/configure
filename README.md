@@ -4,7 +4,7 @@ Configuration hook is a function that is updates CodeceptJS configuration.
 
 Those hooks are expected to simplify configuration for common use cases.
 
-### useHeadlessWhen
+### setHeadlessWhen
 
 Toggle headless mode for Puppeteer, WebDriver, TestCafe, and Nightmare on condition.
 
@@ -12,13 +12,13 @@ Usage:
 
 ```js
 // in codecept.conf.js
-const { useHeadlessWhen } = require('@codeceptjs/configure');
+const { setHeadlessWhen } = require('@codeceptjs/configure');
 
 // enable headless only if environment variable HEADLESS exist
-useHeadlessWhen(process.env.HEADLESS); 
+setHeadlessWhen(process.env.HEADLESS); 
 
 // or enable headless on CI
-useHeadlessWhen(process.env.CI); 
+setHeadlessWhen(process.env.CI); 
 
 exports.config = {
   helpers: {
@@ -33,7 +33,7 @@ exports.config = {
 * For Puppeteer, TestCafe, Nigthmare it enables `show: true`.
 * For WebDriver with Chrome browser adds `--headless` option to chrome options inside desiredCapabilities.
 
-### useSharedCookies
+### setSharedCookies
 
 Shares cookies between browser and REST/GraphQL helpers.
 
@@ -42,10 +42,10 @@ This function obtains cookies from an active session in WebDriver or Puppeteer h
 
 ```js
 // in codecept.conf.js
-const { useSharedCookies } = require('@codeceptjs/configure');
+const { setSharedCookies } = require('@codeceptjs/configure');
 
 // share cookies between browser helpers and REST/GraphQL
-useSharedCookies();
+setSharedCookies();
 
 exports.config = {
   helpers: {

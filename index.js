@@ -1,4 +1,5 @@
 module.exports = {
-  useHeadlessWhen: require('./hooks/useHeadlessWhen'),
-  useSharedCookies: require('./hooks/useSharedCookies'),
+  setHeadlessWhen: require('./hooks/setHeadlessWhen'),
+  setSharedCookies: require('./hooks/setSharedCookies'),
+  setWindowSize: require('./hooks/setWindowSize'),
 }

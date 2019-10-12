@@ -1,12 +1,18 @@
-const Config = require('codeceptjs').config;
+const Config = require('../codeceptjs').config;
 const { expect } = require('chai');
-const { useHeadlessWhen, useSharedCookies } = require('./index');
+const { 
+  setHeadlessWhen, 
+  setSharedCookies,
+  setWindowSize,
+} = require('../index');
 
 describe('Hooks tests', () => {
 
-  beforeEach(() => Config.reset());
+  beforeEach(() => {
+    Config.reset()
+  });
 
-  describe('#useHeadlessWhen', () => {
+  describe('#setHeadlessWhen', () => {
     it('should not enable headless when false', () => {
       const config = {
         helpers: {
@@ -15,7 +21,7 @@ describe('Hooks tests', () => {
           },
         },        
       }
-      useHeadlessWhen(false);
+      setHeadlessWhen(false);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
     });    
@@ -30,7 +36,7 @@ describe('Hooks tests', () => {
           },
         },        
       }
-      useHeadlessWhen(true);
+      setHeadlessWhen(true);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', false);
     });
@@ -46,15 +52,16 @@ describe('Hooks tests', () => {
           },
         },        
       }
-      useHeadlessWhen(true);
+      setHeadlessWhen(true);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
     });
+
   });
 
-  describe('#useSharedCookies', () => {
+  describe('#setSharedCookies', () => {
     const fn = async (request) => {
-      if (!cookies) cookies = await codeceptjs.container.helpers(helper).grabCookie();
+      if (!cookies) cookies = await container.helpers(helper).grabCookie();
       request.headers = { Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
     }
 
@@ -65,7 +72,7 @@ describe('Hooks tests', () => {
           REST: {}
         },        
       }
-      useSharedCookies(true);
+      setSharedCookies(true);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.REST.onRequest');
       expect(Config.get().helpers.REST.onRequest.toString(), fn.toString())
@@ -79,13 +86,46 @@ describe('Hooks tests', () => {
           GraphQLDataFactory: {}
         },        
       }
-      useSharedCookies(true);
+      setSharedCookies(true);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.GraphQL.onRequest');
       expect(Config.get().helpers.GraphQL.onRequest.toString(), fn.toString());
       expect(Config.get()).to.have.nested.property('helpers.GraphQLDataFactory.onRequest');
-      expect(Config.get().helpers.GraphQLDataFactory.onRequest.toString(), fn.toString())
+      expect(Config.get().helpers.GraphQLDataFactory.onRequest.toString()).to.eql(fn.toString())
     });    
+  });
+
+  describe('#setWindowSize', () => {
+    ['Protractor', 'TestCafe', 'Nightmare', 'WebDriver','Puppeteer'].forEach(helper => {
+      it('should set window size for ' + helper, () => {
+        Config.reset();
+        const config = {
+          helpers: {},  
+        }
+        config.helpers[helper] = {};
+        setWindowSize(1900, 1000);
+        Config.create(config);
+        expect(Config.get()).to.have.nested.property(`helpers.${helper}.windowSize`);
+        expect(Config.get().helpers[helper].windowSize).to.eql('1900x1000');
+      });
+    });
+
+    it('should set window size in args for Puppeteer', () => {
+      const config = {
+        helpers: { 
+          Puppeteer: {
+            chrome: {
+              args: ['some-arg']
+            }
+          },
+        }
+      }
+      setWindowSize(1900, 1000);
+      Config.create(config);
+      expect(Config.get().helpers.Puppeteer.chrome.args).to.include('--window-size=1900,1000');
+      expect(Config.get().helpers.Puppeteer.chrome.args).to.include('some-arg');
+
+    });
   });
 
 });

@@ -14,9 +14,6 @@
   "keywords": [
     "codeceptjs"
   ],
-  "peerDependencies": {
-    "codeceptjs": "codeception/codeceptjs"
-  },
   "author": "Michael Bodnarchuk",
   "license": "ISC",
   "bugs": {
@@ -25,9 +22,11 @@
   "homepage": "https://github.com/codecept-js/configure#readme",
   "dependencies": {
     "codeceptjs": "github:codeception/codeceptjs",
-    "lodash.merge": "^4.6.2"
+    "lodash.merge": "^4.6.2",
+    "lodash.mergewith": "^4.6.2"
   },
   "devDependencies": {
+    "codeceptjs": "codeception/codeceptjs",
     "chai": "^4.2.0",
     "mocha": "^6.2.0"
   }

@@ -5,4 +5,4 @@ before_script:
 - cd test/integration && npm install
 script:
 - npm test
-- npm test-integration
+- npm run test-integration

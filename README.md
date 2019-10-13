@@ -15,10 +15,10 @@ Usage:
 const { setHeadlessWhen } = require('@codeceptjs/configure');
 
 // enable headless only if environment variable HEADLESS exist
+// Use it like:
+//
+// HEADLESS=true npx codeceptjs run
 setHeadlessWhen(process.env.HEADLESS); 
-
-// or enable headless on CI
-setHeadlessWhen(process.env.CI); 
 
 exports.config = {
   helpers: {
@@ -65,6 +65,25 @@ exports.config = {
   }
 }
 
+```
+
+### setWindowSize
+
+Universal way to set a browser window size. For Puppeteer this launches Chrome browser with a specified width and height dimensions without changing viewport size. 
+
+Usage: `setWindowSize(width, height)`.
+
+```js
+// in codecept.conf.js
+const { setWindowSize } = require('@codeceptjs/configure');
+
+setWindowSize(1600, 1200);
+
+exports.config = {
+  helpers: {
+    Puppeteer: {}
+  }
+}
 ```
 
 ## Contributing

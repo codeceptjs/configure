@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+test/integration/node_modules
+test/integration/output
+

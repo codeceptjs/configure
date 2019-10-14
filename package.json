@@ -1,6 +1,6 @@
 {
   "name": "@codeceptjs/configure",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Set of CodeceptJS config hooks to simplify configuration",
   "main": "index.js",
   "scripts": {

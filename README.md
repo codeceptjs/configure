@@ -1,6 +1,6 @@
 ## CodeceptJS Configuration Hooks [![Build Status](https://travis-ci.org/codecept-js/configure.svg?branch=master)](https://travis-ci.org/codecept-js/configure)
 
-Configuration hook is a function that is updates CodeceptJS configuration.
+Configuration hook is a function that updates CodeceptJS configuration.
 
 Those hooks are expected to simplify configuration for common use cases.
 

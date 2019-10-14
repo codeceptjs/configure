@@ -4,6 +4,8 @@ Configuration hook is a function that updates CodeceptJS configuration.
 
 Those hooks are expected to simplify configuration for common use cases.
 
+**Requires CodeceptJS >= 2.3.3**
+
 ### setHeadlessWhen
 
 Toggle headless mode for Puppeteer, WebDriver, TestCafe, and Nightmare on condition.

@@ -12,6 +12,12 @@ Those hooks are expected to simplify configuration for common use cases.
 npm i @codeceptjs/configure --save
 ```
 
+## How to use it
+
+Better to see once.
+
+**Watch [YouTube video](https://www.youtube.com/watch?v=onBnfo_rJa4)**
+
 ### setHeadlessWhen
 
 Toggle headless mode for Puppeteer, WebDriver, TestCafe, and Nightmare on condition.

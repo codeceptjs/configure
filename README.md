@@ -14,7 +14,7 @@ Usage:
 // in codecept.conf.js
 const { setHeadlessWhen } = require('@codeceptjs/configure');
 
-// enable headless only if environment variable HEADLESS exist
+// enable headless when env var HEADLESS exists
 // Use it like:
 //
 // HEADLESS=true npx codeceptjs run
@@ -32,6 +32,21 @@ exports.config = {
 
 * For Puppeteer, TestCafe, Nigthmare it enables `show: true`.
 * For WebDriver with Chrome browser adds `--headless` option to chrome options inside desiredCapabilities.
+
+### setHeadedWhen
+
+Opposite to [setHeadlessWhen](#setHeadlessWhen). Forces window mode for running tests.
+
+```js
+// in codecept.conf.js
+const { setHeadlessWhen } = require('@codeceptjs/configure');
+
+// enable window mode when env var DEV exists
+// Use it like:
+//
+// DEV=true npx codeceptjs run
+setHeadedWhen(process.env.DEV); 
+```
 
 ### setSharedCookies
 

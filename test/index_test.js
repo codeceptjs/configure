@@ -2,6 +2,7 @@ const Config = require('../codeceptjs').config;
 const { expect } = require('chai');
 const { 
   setHeadlessWhen, 
+  setHeadedWhen,   
   setSharedCookies,
   setWindowSize,
 } = require('../index');
@@ -58,6 +59,59 @@ describe('Hooks tests', () => {
     });
 
   });
+
+
+  describe('#setHeadedWhen', () => {
+    it('should not enable Headed when false', () => {
+      const config = {
+        helpers: {
+          Puppeteer: {
+            show: true,
+          },
+        },        
+      }
+      setHeadedWhen(false);
+      Config.create(config);
+      expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
+    });    
+    it('should enable Headed for Puppeteer', () => {
+      const config = {
+        helpers: {
+          Puppeteer: {
+            url: 'http://localhost',
+            restart: false,
+            windowSize: '1600x1200',
+            show: false,
+          },
+        },        
+      }
+      setHeadedWhen(true);
+      Config.create(config);
+      expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
+    });
+
+    it('should enable Headed for WebDriver', () => {
+      const config = {
+        helpers: {
+          WebDriver: {
+            url: 'http://localhost',
+            browser: 'chrome',
+            restart: false,
+            windowSize: '1600x1200',
+            desiredCapabilities: {
+              chromeOptions: {
+                args: ['--headless']
+              }
+            }
+          },
+        },        
+      }
+      setHeadedWhen(true);
+      Config.create(config);
+      expect(Config.get()).not.to.have.nested.property('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
+    });
+
+  });  
 
   describe('#setSharedCookies', () => {
     const fn = async (request) => {

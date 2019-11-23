@@ -1,12 +1,10 @@
 const {
-  setWindowSize,
   setHeadlessWhen,
-  setSharedCookies
-} = require('../../index');
+  setWindowSize,
+} = require('../../index'); // @codeceptjs/configure
 
+setHeadlessWhen(process.env.HEADLESS);
 setWindowSize(1500, 800);
-setHeadlessWhen(process.env.CI);
-setSharedCookies();
 
 exports.config = {
   tests: './*_test.js',
@@ -14,13 +12,16 @@ exports.config = {
   helpers: {
     Puppeteer: {
       url: 'https://github.com',
-      show: true
-    }
+      show: true,
+      browser: 'chrome',
+    },
   },
   include: {
     I: './steps_file.js'
   },
   bootstrap: null,
   mocha: {},
-  name: 'integration'
+  name: 'integration',
+  plugins: {
+  }
 }

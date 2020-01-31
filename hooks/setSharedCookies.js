@@ -1,4 +1,4 @@
-const { container, config } = require('../codeceptjs');
+const { container, config, event } = require('../codeceptjs');
 
 module.exports = function() {
   const browserHelpers = ['WebDriver','Protractor','Puppeteer','TestCafe','Nigthmare'];
@@ -7,7 +7,7 @@ module.exports = function() {
     let cookies;
     const shareCookiesFn = async (request) => {
       if (!cookies) cookies = await container.helpers(helper).grabCookie();
-      request.headers = { Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
+      request.headers = { ...request.headers, Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
     }
     if (cfg.helpers.REST) {
       cfg.helpers.REST.onRequest = shareCookiesFn;
@@ -21,6 +21,9 @@ module.exports = function() {
     if (cfg.helpers.GraphQLDataFactory) {
       cfg.helpers.GraphQLDataFactory.onRequest = shareCookiesFn;
     }
+    event.dispatcher.on(event.test.finished, () => {
+      cookies = null;
+    });    
   });
   
   function detectBrowserHelper(helperConfig) {

@@ -42,6 +42,23 @@ describe('Hooks tests', () => {
       expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', false);
     });
 
+    it('should enable headless for Playwright', () => {
+      const config = {
+        helpers: {
+          Playwright: {
+            url: 'http://localhost',
+            restart: false,
+            windowSize: '1600x1200',
+            show: true,
+          },
+        },        
+      }
+      setHeadlessWhen(true);
+      Config.create(config);
+      expect(Config.get()).to.have.nested.property('helpers.Playwright.show', false);
+    });
+
+
     it('should enable headless for WebDriver', () => {
       const config = {
         helpers: {
@@ -90,6 +107,22 @@ describe('Hooks tests', () => {
       expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
     });
 
+    it('should enable Headed for Playwright', () => {
+      const config = {
+        helpers: {
+          Playwright: {
+            url: 'http://localhost',
+            restart: false,
+            windowSize: '1600x1200',
+            show: false,
+          },
+        },        
+      }
+      setHeadedWhen(true);
+      Config.create(config);
+      expect(Config.get()).to.have.nested.property('helpers.Playwright.show', true);
+    });    
+
     it('should enable Headed for WebDriver', () => {
       const config = {
         helpers: {
@@ -116,7 +149,7 @@ describe('Hooks tests', () => {
   describe('#setSharedCookies', () => {
     const fn = async (request) => {
       if (!cookies) cookies = await container.helpers(helper).grabCookie();
-      request.headers = { Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
+      request.headers = { ...request.headers, Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
     }
 
     it('should copy cookies from WebDriver to REST', () => {
@@ -150,7 +183,7 @@ describe('Hooks tests', () => {
   });
 
   describe('#setWindowSize', () => {
-    ['Protractor', 'TestCafe', 'Nightmare', 'WebDriver','Puppeteer'].forEach(helper => {
+    ['Protractor', 'TestCafe', 'Nightmare', 'WebDriver','Puppeteer','Playwright'].forEach(helper => {
       it('should set window size for ' + helper, () => {
         Config.reset();
         const config = {

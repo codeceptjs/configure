@@ -8,6 +8,9 @@ module.exports = function(when) {
     if (cfg.helpers.Puppeteer) {
       cfg.helpers.Puppeteer.show = true;
     }
+    if (cfg.helpers.Playwright) {
+      cfg.helpers.Playwright.show = true;
+    }    
     if (cfg.helpers.Nightmare) {
       cfg.helpers.Nightmare.show = true;
     }

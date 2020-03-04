@@ -30,6 +30,6 @@
     "chai": "^4.2.0",
     "codeceptjs": "github:codeception/codeceptjs",
     "mocha": "^6.2.0",
-    "puppeteer": "^1.20.0"
+    "puppeteer": "^2.1"
   }
 }

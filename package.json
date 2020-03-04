@@ -1,6 +1,6 @@
 {
   "name": "@codeceptjs/configure",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Set of CodeceptJS config hooks to simplify configuration",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,6 @@
     "chai": "^4.2.0",
     "codeceptjs": "github:codeception/codeceptjs",
     "mocha": "^6.2.0",
-    "puppeteer": "^1.20.0"
+    "puppeteer": "^2.1"
   }
 }

@@ -12,7 +12,7 @@ exports.config = {
   helpers: {
     Puppeteer: {
       url: 'https://github.com',
-      show: true,
+      show: false,
       browser: 'chrome',
     },
   },

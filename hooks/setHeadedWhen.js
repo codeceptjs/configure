@@ -5,7 +5,7 @@ module.exports = function(when) {
 
   config.addHook(cfg => {
     if (!cfg.helpers) return;
-    if (cfg.helpers.Puppeteer) {
+    if (cfg.helpers.Puppeteer) {      
       cfg.helpers.Puppeteer.show = true;
     }
     if (cfg.helpers.Playwright) {

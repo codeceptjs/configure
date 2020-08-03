@@ -9,8 +9,8 @@ module.exports = function(width, height) {
       cfg.helpers.Puppeteer.windowSize = `${width}x${height}`;
 
       // prepare window for a browser
-      cfg.helpers.Puppeteer.args = merge(
-        cfg.helpers.Puppeteer.args || {}, 
+      cfg.helpers.Puppeteer.chrome = merge(
+        cfg.helpers.Puppeteer.chrome || {}, 
         { args, defaultViewport: null, } // disables viewport emualtion. See https://github.com/Codeception/CodeceptJS/issues/1209#issuecomment-522487793
       );
     }

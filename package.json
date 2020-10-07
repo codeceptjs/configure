@@ -24,7 +24,7 @@
   "dependencies": {
     "lodash.merge": "^4.6.2",
     "lodash.mergewith": "^4.6.2",
-    "webdriverio": "^5.15.2"
+    "webdriverio": "^6.4.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",

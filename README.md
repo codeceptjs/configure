@@ -96,6 +96,16 @@ exports.config = {
 
 ```
 
+### setBrowser
+
+Changes browser in config for Playwright, Puppeteer, WebDriver, Protractor & TestCafe:
+
+```js
+const { setBrowser } = require('@codeceptjs/configure');
+
+setBrowser(process.env.BROWSER);
+```
+
 ### setWindowSize
 
 Universal way to set a browser window size. For Puppeteer this launches Chrome browser with a specified width and height dimensions without changing viewport size. 

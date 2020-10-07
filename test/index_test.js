@@ -5,6 +5,7 @@ const {
   setHeadedWhen,   
   setSharedCookies,
   setWindowSize,
+  setBrowser,
 } = require('../index');
 
 describe('Hooks tests', () => {
@@ -148,8 +149,12 @@ describe('Hooks tests', () => {
 
   describe('#setSharedCookies', () => {
     const fn = async (request) => {
-      if (!cookies) cookies = await container.helpers(helper).grabCookie();
-      request.headers = { ...request.headers, Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
+      try {
+        if (!cookies) cookies = await container.helpers(helper).grabCookie();
+        request.headers = { ...request.headers, Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
+      } catch (err) {
+        output.error('Can\'t fetch cookies from the current browser. Open a browser and log in before performing request');
+      }
     }
 
     it('should copy cookies from WebDriver to REST', () => {
@@ -214,5 +219,40 @@ describe('Hooks tests', () => {
 
     });
   });
+
+  describe('#setBrowser', () => {
+    ['Protractor', 'TestCafe','WebDriver','Playwright'].forEach(helper => {
+      it('should set browser to firefox for ' + helper, () => {
+        Config.reset();
+        const config = {
+          helpers: {},  
+        }
+        config.helpers[helper] = {};
+        setBrowser('firefox');
+        Config.create(config);
+        expect(Config.get()).to.have.nested.property(`helpers.${helper}.browser`);
+        expect(Config.get().helpers[helper].browser).to.eql('firefox');
+      });
+    });
+
+    it('should throw exception when browser is not available', () => {
+      Config.reset();
+      const config = {
+        helpers: {
+          Playwright: {
+
+          }
+        },  
+      }
+      setBrowser('chrome');
+      try {
+        Config.create(config);
+      } catch (err) {
+        expect(err.toString()).to.contain('not supported');
+        return
+      }
+      throw new Error('no exception thrown');
+    });
+  });  
 
 });

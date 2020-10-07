@@ -3,4 +3,5 @@ module.exports = {
   setHeadedWhen: require('./hooks/setHeadedWhen'),
   setSharedCookies: require('./hooks/setSharedCookies'),
   setWindowSize: require('./hooks/setWindowSize'),
+  setBrowser: require('./hooks/setBrowser'),
 }

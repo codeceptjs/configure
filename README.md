@@ -1,4 +1,4 @@
-## CodeceptJS Configuration Hooks [![Build Status](https://travis-ci.org/codecept-js/configure.svg?branch=master)](https://travis-ci.org/codecept-js/configure)
+## CodeceptJS Configuration Hooks [![Build Status](https://travis-ci.org/codeceptjs/configure.svg?branch=master)](https://travis-ci.org/codeceptjs/configure)
 
 Configuration hook helps you update CodeceptJS configuration at ease.
 

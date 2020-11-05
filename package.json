@@ -23,13 +23,13 @@
   "homepage": "https://github.com/codecept-js/configure#readme",
   "dependencies": {
     "lodash.merge": "^4.6.2",
-    "lodash.mergewith": "^4.6.2",
-    "webdriverio": "^6.4.2"
+    "lodash.mergewith": "^4.6.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "codeceptjs": "^3.0.0",
     "mocha": "^6.2.0",
-    "puppeteer": "^2.1"
+    "puppeteer": "^2.1",
+    "webdriverio": "^6.4.2"
   }
 }

@@ -6,6 +6,7 @@ const {
   setSharedCookies,
   setWindowSize,
   setBrowser,
+  setTestHost,
 } = require('../index');
 
 describe('Hooks tests', () => {
@@ -252,6 +253,22 @@ describe('Hooks tests', () => {
         return
       }
       throw new Error('no exception thrown');
+    });
+  });  
+  
+  describe('#setTestHost', () => {
+    ['Protractor', 'TestCafe','WebDriver','Playwright','Puppeteer'].forEach(helper => {
+      it('should set url for ' + helper, () => {
+        Config.reset();
+        const config = {
+          helpers: {},  
+        }
+        config.helpers[helper] = {};
+        setTestHost('test.com');
+        Config.create(config);
+        expect(Config.get()).to.have.nested.property(`helpers.${helper}.url`);
+        expect(Config.get().helpers[helper].url).to.eql('test.com');
+      });
     });
   });  
 

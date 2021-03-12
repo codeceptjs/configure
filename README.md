@@ -125,6 +125,16 @@ exports.config = {
 }
 ```
 
+### setTestHost
+
+Changes url in config for Playwright, Puppeteer, WebDriver, Protractor & TestCafe:
+
+```js
+const { setTestHost } = require('@codeceptjs/configure');
+
+setTestHost(process.env.TEST_HOST);
+```
+
 ## Contributing
 
 Please send your config hooks!

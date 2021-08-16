@@ -1,7 +1,7 @@
 const { container, config, event, output } = require('../codeceptjs');
 
 module.exports = function() {
-  const browserHelpers = ['WebDriver','Protractor','Playwright','Puppeteer','TestCafe','Nigthmare'];
+  const browserHelpers = ['WebDriver','Protractor','Playwright','Puppeteer','TestCafe','Nightmare'];
   config.addHook(cfg => {
     const helper = detectBrowserHelper(cfg.helpers);
     let cookies;

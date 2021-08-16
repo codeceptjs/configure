@@ -1,8 +1,8 @@
 const Config = require('../codeceptjs').config;
 const { expect } = require('chai');
-const { 
-  setHeadlessWhen, 
-  setHeadedWhen,   
+const {
+  setHeadlessWhen,
+  setHeadedWhen,
   setSharedCookies,
   setWindowSize,
   setBrowser,
@@ -22,12 +22,12 @@ describe('Hooks tests', () => {
           Puppeteer: {
             show: true,
           },
-        },        
+        },
       }
       setHeadlessWhen(false);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
-    });    
+    });
     it('should enable headless for Puppeteer', () => {
       const config = {
         helpers: {
@@ -37,7 +37,7 @@ describe('Hooks tests', () => {
             windowSize: '1600x1200',
             show: true,
           },
-        },        
+        },
       }
       setHeadlessWhen(true);
       Config.create(config);
@@ -53,7 +53,7 @@ describe('Hooks tests', () => {
             windowSize: '1600x1200',
             show: true,
           },
-        },        
+        },
       }
       setHeadlessWhen(true);
       Config.create(config);
@@ -61,7 +61,7 @@ describe('Hooks tests', () => {
     });
 
 
-    it('should enable headless for WebDriver', () => {
+    it('should enable headless for WebDriver with browser Chrome', () => {
       const config = {
         helpers: {
           WebDriver: {
@@ -70,11 +70,27 @@ describe('Hooks tests', () => {
             restart: false,
             windowSize: '1600x1200',
           },
-        },        
+        },
       }
       setHeadlessWhen(true);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
+    });
+
+    it('should enable headless for WebDriver with browser Firefox', () => {
+      const config = {
+        helpers: {
+          WebDriver: {
+            url: 'http://localhost',
+            browser: 'firefox',
+            restart: false,
+            windowSize: '1600x1200',
+          },
+        },
+      }
+      setHeadlessWhen(true);
+      Config.create(config);
+      expect(Config.get()).to.have.nested.property('helpers.WebDriver.desiredCapabilities.firefoxOptions.args[0]', '--headless');
     });
 
   });
@@ -87,12 +103,12 @@ describe('Hooks tests', () => {
           Puppeteer: {
             show: true,
           },
-        },        
+        },
       }
       setHeadedWhen(false);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
-    });    
+    });
     it('should enable Headed for Puppeteer', () => {
       const config = {
         helpers: {
@@ -102,7 +118,7 @@ describe('Hooks tests', () => {
             windowSize: '1600x1200',
             show: false,
           },
-        },        
+        },
       }
       setHeadedWhen(true);
       Config.create(config);
@@ -118,14 +134,14 @@ describe('Hooks tests', () => {
             windowSize: '1600x1200',
             show: false,
           },
-        },        
+        },
       }
       setHeadedWhen(true);
       Config.create(config);
       expect(Config.get()).to.have.nested.property('helpers.Playwright.show', true);
-    });    
+    });
 
-    it('should enable Headed for WebDriver', () => {
+    it('should enable Headed for WebDriver with browser Chrome', () => {
       const config = {
         helpers: {
           WebDriver: {
@@ -139,14 +155,35 @@ describe('Hooks tests', () => {
               }
             }
           },
-        },        
+        },
       }
       setHeadedWhen(true);
       Config.create(config);
       expect(Config.get()).not.to.have.nested.property('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
     });
 
-  });  
+    it('should enable Headed for WebDriver with browser Firefox', () => {
+      const config = {
+        helpers: {
+          WebDriver: {
+            url: 'http://localhost',
+            browser: 'firefox',
+            restart: false,
+            windowSize: '1600x1200',
+            desiredCapabilities: {
+              firefoxOptions: {
+                args: ['--headless']
+              }
+            }
+          },
+        },
+      }
+      setHeadedWhen(true);
+      Config.create(config);
+      expect(Config.get()).not.to.have.nested.property('helpers.WebDriver.desiredCapabilities.firefoxOptions.args[0]', '--headless');
+    });
+
+  });
 
   describe('#setSharedCookies', () => {
     const fn = async (request) => {
@@ -163,7 +200,7 @@ describe('Hooks tests', () => {
         helpers: {
           WebDriver: {},
           REST: {}
-        },        
+        },
       }
       setSharedCookies(true);
       Config.create(config);
@@ -177,7 +214,7 @@ describe('Hooks tests', () => {
           WebDriver: {},
           GraphQL: {},
           GraphQLDataFactory: {}
-        },        
+        },
       }
       setSharedCookies(true);
       Config.create(config);
@@ -185,7 +222,7 @@ describe('Hooks tests', () => {
       expect(Config.get().helpers.GraphQL.onRequest.toString(), fn.toString());
       expect(Config.get()).to.have.nested.property('helpers.GraphQLDataFactory.onRequest');
       expect(Config.get().helpers.GraphQLDataFactory.onRequest.toString()).to.eql(fn.toString())
-    });    
+    });
   });
 
   describe('#setWindowSize', () => {
@@ -193,7 +230,7 @@ describe('Hooks tests', () => {
       it('should set window size for ' + helper, () => {
         Config.reset();
         const config = {
-          helpers: {},  
+          helpers: {},
         }
         config.helpers[helper] = {};
         setWindowSize(1900, 1000);
@@ -205,7 +242,7 @@ describe('Hooks tests', () => {
 
     it('should set window size in args for Puppeteer', () => {
       const config = {
-        helpers: { 
+        helpers: {
           Puppeteer: {
             chrome: {
               args: ['some-arg']
@@ -226,7 +263,7 @@ describe('Hooks tests', () => {
       it('should set browser to firefox for ' + helper, () => {
         Config.reset();
         const config = {
-          helpers: {},  
+          helpers: {},
         }
         config.helpers[helper] = {};
         setBrowser('firefox');
@@ -243,7 +280,7 @@ describe('Hooks tests', () => {
           Playwright: {
 
           }
-        },  
+        },
       }
       setBrowser('chrome');
       try {
@@ -271,5 +308,4 @@ describe('Hooks tests', () => {
       });
     });
   });  
-
 });

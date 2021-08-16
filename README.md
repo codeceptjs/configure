@@ -45,7 +45,7 @@ exports.config = {
 ```
 
 * For Puppeteer, TestCafe, Nigthmare, Playwright: it enables `show: true`.
-* For WebDriver with Chrome browser: it adds `--headless` option to chrome options inside `desiredCapabilities`.
+* For WebDriver with Chrome or Firefox browser: it adds `--headless` option to chrome/firefox options inside `desiredCapabilities`.
 
 ### setHeadedWhen
 
@@ -80,7 +80,7 @@ exports.config = {
   helpers: {
     WebDriver: {
       // standard config goes here      
-    } 
+    },
     // or Puppeteer
     // or TestCafe,
     REST: {

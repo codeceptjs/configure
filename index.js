@@ -4,4 +4,5 @@ module.exports = {
   setSharedCookies: require('./hooks/setSharedCookies'),
   setWindowSize: require('./hooks/setWindowSize'),
   setBrowser: require('./hooks/setBrowser'),
+  setTestHost: require('./hooks/setTestHost'),
 }

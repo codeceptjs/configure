@@ -68,7 +68,7 @@ The list of plugins can be updated from version to version so this hook ensures 
 
 ```js
 // in codecept.conf.js
-const { setHeadlessWhen } = require('@codeceptjs/configure');
+const { setCommonPlugins } = require('@codeceptjs/configure');
 
 setCommonPlugins();
 ```

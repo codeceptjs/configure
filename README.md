@@ -75,12 +75,12 @@ setCommonPlugins();
 
 These plugins will be loaded:
 
-* tryTo
-* retryFailedStep
-* retryTo
-* eachElement
-* pauseOnFail
-* screenshotOnFail
+* tryTo (enabled globally)
+* retryFailedStep (enabled globally)
+* retryTo (enabled globally)
+* eachElement (enabled globally)
+* pauseOnFail (disabled, should be turned on when needed)
+* screenshotOnFail (enable globally)
 
 ### setSharedCookies
 

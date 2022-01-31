@@ -1,3 +1,7 @@
+0.8.0
+
+* Added `setCommonPlugins` hook
+
 0.7.0
 
 * Added `setTestHost` hook

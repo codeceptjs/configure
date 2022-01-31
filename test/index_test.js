@@ -7,6 +7,7 @@ const {
   setWindowSize,
   setBrowser,
   setTestHost,
+  setCommonPlugins,
 } = require('../index');
 
 describe('Hooks tests', () => {
@@ -308,4 +309,40 @@ describe('Hooks tests', () => {
       });
     });
   });  
+
+  describe('#setCommonPlugins', () => {
+    it('create standard plugins', () => {
+      Config.reset();
+      const config = {
+        helpers: {},
+      }
+      setCommonPlugins();
+      Config.create(config);
+      expect(Config.get()).to.have.nested.property(`plugins.screenshotOnFail`);
+      expect(Config.get()).to.have.nested.property(`plugins.tryTo`);
+      expect(Config.get()).to.have.nested.property(`plugins.retryTo`);
+      expect(Config.get()).to.have.nested.property(`plugins.eachElement`);
+    });
+
+    it('should not override plugins', () => {
+      Config.reset();
+      const config = {
+        helpers: {},
+        plugins: {
+          screenshotOnFail: { enabled: false },
+          otherPlugin: {}
+        }
+      }
+      setCommonPlugins();
+      Config.create(config);
+      expect(Config.get()).to.have.nested.property(`plugins.screenshotOnFail`);
+      expect(Config.get()).to.have.nested.property(`plugins.screenshotOnFail.enabled`);
+      expect(Config.get().plugins.screenshotOnFail.enabled).to.be.false;
+      expect(Config.get()).to.have.nested.property(`plugins.tryTo`);
+      expect(Config.get()).to.have.nested.property(`plugins.retryTo`);
+      expect(Config.get()).to.have.nested.property(`plugins.eachElement`);
+      expect(Config.get()).to.have.nested.property(`plugins.otherPlugin`);
+    });
+  });
+
 });

@@ -5,4 +5,5 @@ module.exports = {
   setWindowSize: require('./hooks/setWindowSize'),
   setBrowser: require('./hooks/setBrowser'),
   setTestHost: require('./hooks/setTestHost'),
+  setCommonPlugins: require('./hooks/setCommonPlugins'),
 }

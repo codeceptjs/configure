@@ -61,6 +61,26 @@ const { setHeadlessWhen } = require('@codeceptjs/configure');
 // export DEV=true && npx codeceptjs run
 setHeadedWhen(process.env.DEV); 
 ```
+### setCommonPlugins
+
+Enables CodeceptJS plugins which are recommened for common usage.
+The list of plugins can be updated from version to version so this hook ensures that all of them are loaded and you won't need to update them in a config:
+
+```js
+// in codecept.conf.js
+const { setHeadlessWhen } = require('@codeceptjs/configure');
+
+setCommonPlugins();
+```
+
+These plugins will be loaded:
+
+* tryTo
+* retryFailedStep
+* retryTo
+* eachElement
+* pauseOnFail
+* screenshotOnFail
 
 ### setSharedCookies
 

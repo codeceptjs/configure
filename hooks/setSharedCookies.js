@@ -27,9 +27,9 @@ module.exports = function() {
     }
     event.dispatcher.on(event.test.finished, () => {
       cookies = null;
-    });    
+    });
   });
-  
+
   function detectBrowserHelper(helperConfig) {
     if (!helperConfig) return false;
     for (const helper of browserHelpers) {

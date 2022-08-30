@@ -19,8 +19,8 @@ module.exports = function(width, height) {
       if (!cfg.helpers.Playwright.browser || cfg.helpers.Playwright.browser === 'chromium') {
         const args = ['--no-sandbox', `--window-size=${width},${height}`];
         cfg.helpers.Playwright.chromium = merge(
-          cfg.helpers.Playwright.chromium || {}, 
-          { args, defaultViewport: null, } // disables viewport emualtion. See https://github.com/Codeception/CodeceptJS/issues/1209#issuecomment-522487793
+          cfg.helpers.Playwright.chromium || {},
+          { args, defaultViewport: null, } // disables viewport emulation. See https://github.com/Codeception/CodeceptJS/issues/1209#issuecomment-522487793
         );
       }
       cfg.helpers.Playwright.windowSize = `${width}x${height}`;

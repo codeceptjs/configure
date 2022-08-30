@@ -1,6 +1,6 @@
-## CodeceptJS Configuration Hooks [![Build Status](https://travis-ci.org/codecept-js/configure.svg?branch=master)](https://travis-ci.org/codecept-js/configure)
+## CodeceptJS Configuration Hooks [![Build Status](https://travis-ci.org/codeceptjs/configure.svg?branch=master)](https://travis-ci.org/codeceptjs/configure)
 
-Configuration hook is a function that updates CodeceptJS configuration.
+Configuration hook helps you update CodeceptJS configuration at ease.
 
 Those hooks are expected to simplify configuration for common use cases.
 
@@ -20,7 +20,7 @@ Better to see once.
 
 ### setHeadlessWhen
 
-Toggle headless mode for Puppeteer, WebDriver, TestCafe, and Nightmare on condition.
+Toggle headless mode for Puppeteer, WebDriver, TestCafe, Nightmare and Playwright on condition.
 
 Usage:
 
@@ -31,7 +31,7 @@ const { setHeadlessWhen } = require('@codeceptjs/configure');
 // enable headless when env var HEADLESS exists
 // Use it like:
 //
-// HEADLESS=true npx codeceptjs run
+// export HEADLESS=true && npx codeceptjs run
 setHeadlessWhen(process.env.HEADLESS); 
 
 exports.config = {
@@ -44,8 +44,8 @@ exports.config = {
 }
 ```
 
-* For Puppeteer, TestCafe, Nigthmare it enables `show: true`.
-* For WebDriver with Chrome browser adds `--headless` option to chrome options inside desiredCapabilities.
+* For Puppeteer, TestCafe, Nigthmare, Playwright: it enables `show: true`.
+* For WebDriver with Chrome or Firefox browser: it adds `--headless` option to chrome/firefox options inside `desiredCapabilities`.
 
 ### setHeadedWhen
 
@@ -58,9 +58,29 @@ const { setHeadlessWhen } = require('@codeceptjs/configure');
 // enable window mode when env var DEV exists
 // Use it like:
 //
-// DEV=true npx codeceptjs run
+// export DEV=true && npx codeceptjs run
 setHeadedWhen(process.env.DEV); 
 ```
+### setCommonPlugins
+
+Enables CodeceptJS plugins which are recommened for common usage.
+The list of plugins can be updated from version to version so this hook ensures that all of them are loaded and you won't need to update them in a config:
+
+```js
+// in codecept.conf.js
+const { setCommonPlugins } = require('@codeceptjs/configure');
+
+setCommonPlugins();
+```
+
+These plugins will be loaded:
+
+* tryTo (enabled globally)
+* retryFailedStep (enabled globally)
+* retryTo (enabled globally)
+* eachElement (enabled globally)
+* pauseOnFail (disabled, should be turned on when needed)
+* screenshotOnFail (enable globally)
 
 ### setSharedCookies
 
@@ -80,7 +100,7 @@ exports.config = {
   helpers: {
     WebDriver: {
       // standard config goes here      
-    } 
+    },
     // or Puppeteer
     // or TestCafe,
     REST: {
@@ -94,6 +114,16 @@ exports.config = {
   }
 }
 
+```
+
+### setBrowser
+
+Changes browser in config for Playwright, Puppeteer, WebDriver, Protractor & TestCafe:
+
+```js
+const { setBrowser } = require('@codeceptjs/configure');
+
+setBrowser(process.env.BROWSER);
 ```
 
 ### setWindowSize
@@ -113,6 +143,16 @@ exports.config = {
     Puppeteer: {}
   }
 }
+```
+
+### setTestHost
+
+Changes url in config for Playwright, Puppeteer, WebDriver, Protractor & TestCafe:
+
+```js
+const { setTestHost } = require('@codeceptjs/configure');
+
+setTestHost(process.env.TEST_HOST);
 ```
 
 ## Contributing

@@ -11,7 +11,7 @@ module.exports = function(when) {
     }
     if (cfg.helpers.Playwright) {
       cfg.helpers.Playwright.show = false;
-    }    
+    }
     if (cfg.helpers.Nightmare) {
       cfg.helpers.Nightmare.show = false;
     }
@@ -25,9 +25,25 @@ module.exports = function(when) {
           cfg.helpers.WebDriver.desiredCapabilities || {},
           {
             chromeOptions: {
-              args: [ "--headless", "--disable-gpu", "--no-sandbox" ]
+              args: [
+                "--headless",
+                // Use --disable-gpu to avoid an error from a missing Mesa library, as per
+                // https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md
+                "--disable-gpu"
+              ]
             }
           }
+        )
+      } else if (cfg.helpers.WebDriver.browser === 'firefox') {
+        cfg.helpers.WebDriver.desiredCapabilities = merge(
+            cfg.helpers.WebDriver.desiredCapabilities || {},
+            {
+              firefoxOptions: {
+                args: [
+                  "--headless",
+                ]
+              }
+            }
         )
       }
     }

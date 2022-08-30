@@ -1,6 +1,6 @@
 {
   "name": "@codeceptjs/configure",
-  "version": "0.5.2",
+  "version": "0.7.0",
   "description": "Set of CodeceptJS config hooks to simplify configuration",
   "main": "index.js",
   "scripts": {
@@ -23,13 +23,13 @@
   "homepage": "https://github.com/codecept-js/configure#readme",
   "dependencies": {
     "lodash.merge": "^4.6.2",
-    "lodash.mergewith": "^4.6.2",
-    "webdriverio": "^5.15.2"
+    "lodash.mergewith": "^4.6.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "codeceptjs": "github:codeception/codeceptjs",
-    "mocha": "^6.2.0",
-    "puppeteer": "^2.1"
+    "codeceptjs": "^3.3.0",
+    "mocha": "^8.2.1",
+    "puppeteer": "^2.1",
+    "webdriverio": "^6.4.2"
   }
 }

@@ -62,4 +62,5 @@ typings/
 
 test/integration/node_modules
 test/integration/output
+coverage
 

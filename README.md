@@ -175,7 +175,7 @@ To create a custom hook follow this rules.
 3. Require `config` object from `codeceptjs` package.
 4. Use `config.addHook((config) => {})` to set a hook for configuration
 5. Add a test to `index.test.js`
-6. Run `mocha index.test.js`
+6. Run `npm run test`
 
 See current hooks as examples.
 

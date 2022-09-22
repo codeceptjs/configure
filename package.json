@@ -31,5 +31,8 @@
     "mocha": "^8.2.1",
     "puppeteer": "^2.1",
     "webdriverio": "^6.4.2"
+  },
+  "peerDependencies": {
+    "codeceptjs": ">= 2.3.3"
   }
 }

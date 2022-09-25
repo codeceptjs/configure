@@ -1,5 +1,4 @@
 const Config = require('../codeceptjs').config;
-const { expect } = require('chai');
 const {
   setHeadlessWhen,
   setHeadedWhen,
@@ -9,6 +8,7 @@ const {
   setTestHost,
   setCommonPlugins,
 } = require('../index');
+const {output, container} = require("codeceptjs");
 
 describe('Hooks tests', () => {
 
@@ -17,7 +17,7 @@ describe('Hooks tests', () => {
   });
 
   describe('#setHeadlessWhen', () => {
-    it('should not enable headless when false', () => {
+    test('should not enable headless when false', () => {
       const config = {
         helpers: {
           Puppeteer: {
@@ -27,9 +27,10 @@ describe('Hooks tests', () => {
       }
       setHeadlessWhen(false);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
+      expect(Config.get()).toHaveProperty('helpers.Puppeteer.show', true);
     });
-    it('should enable headless for Puppeteer', () => {
+
+    test('should enable headless for Puppeteer', () => {
       const config = {
         helpers: {
           Puppeteer: {
@@ -42,10 +43,10 @@ describe('Hooks tests', () => {
       }
       setHeadlessWhen(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', false);
+      expect(Config.get()).toHaveProperty('helpers.Puppeteer.show', false);
     });
 
-    it('should enable headless for Playwright', () => {
+    test('should enable headless for Playwright', () => {
       const config = {
         helpers: {
           Playwright: {
@@ -58,11 +59,11 @@ describe('Hooks tests', () => {
       }
       setHeadlessWhen(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.Playwright.show', false);
+      expect(Config.get()).toHaveProperty('helpers.Playwright.show', false);
     });
 
 
-    it('should enable headless for WebDriver with browser Chrome', () => {
+    test('should enable headless for WebDriver with browser Chrome', () => {
       const config = {
         helpers: {
           WebDriver: {
@@ -75,10 +76,10 @@ describe('Hooks tests', () => {
       }
       setHeadlessWhen(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
+      expect(Config.get()).toHaveProperty('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
     });
 
-    it('should enable headless for WebDriver with browser Firefox', () => {
+    test('should enable headless for WebDriver with browser Firefox', () => {
       const config = {
         helpers: {
           WebDriver: {
@@ -91,14 +92,14 @@ describe('Hooks tests', () => {
       }
       setHeadlessWhen(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.WebDriver.desiredCapabilities.firefoxOptions.args[0]', '--headless');
+      expect(Config.get()).toHaveProperty('helpers.WebDriver.desiredCapabilities.firefoxOptions.args[0]', '--headless');
     });
 
   });
 
 
   describe('#setHeadedWhen', () => {
-    it('should not enable Headed when false', () => {
+    test('should not enable Headed when false', () => {
       const config = {
         helpers: {
           Puppeteer: {
@@ -108,9 +109,9 @@ describe('Hooks tests', () => {
       }
       setHeadedWhen(false);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
+      expect(Config.get()).toHaveProperty('helpers.Puppeteer.show', true);
     });
-    it('should enable Headed for Puppeteer', () => {
+    test('should enable Headed for Puppeteer', () => {
       const config = {
         helpers: {
           Puppeteer: {
@@ -123,10 +124,10 @@ describe('Hooks tests', () => {
       }
       setHeadedWhen(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.Puppeteer.show', true);
+      expect(Config.get()).toHaveProperty('helpers.Puppeteer.show', true);
     });
 
-    it('should enable Headed for Playwright', () => {
+    test('should enable Headed for Playwright', () => {
       const config = {
         helpers: {
           Playwright: {
@@ -139,10 +140,10 @@ describe('Hooks tests', () => {
       }
       setHeadedWhen(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.Playwright.show', true);
+      expect(Config.get()).toHaveProperty('helpers.Playwright.show', true);
     });
 
-    it('should enable Headed for WebDriver with browser Chrome', () => {
+    test('should enable Headed for WebDriver with browser Chrome', () => {
       const config = {
         helpers: {
           WebDriver: {
@@ -160,10 +161,10 @@ describe('Hooks tests', () => {
       }
       setHeadedWhen(true);
       Config.create(config);
-      expect(Config.get()).not.to.have.nested.property('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
+      expect(Config.get()).not.toHaveProperty('helpers.WebDriver.desiredCapabilities.chromeOptions.args[0]', '--headless');
     });
 
-    it('should enable Headed for WebDriver with browser Firefox', () => {
+    test('should enable Headed for WebDriver with browser Firefox', () => {
       const config = {
         helpers: {
           WebDriver: {
@@ -181,7 +182,7 @@ describe('Hooks tests', () => {
       }
       setHeadedWhen(true);
       Config.create(config);
-      expect(Config.get()).not.to.have.nested.property('helpers.WebDriver.desiredCapabilities.firefoxOptions.args[0]', '--headless');
+      expect(Config.get()).not.toHaveProperty('helpers.WebDriver.desiredCapabilities.firefoxOptions.args[0]', '--headless');
     });
 
   });
@@ -190,13 +191,13 @@ describe('Hooks tests', () => {
     const fn = async (request) => {
       try {
         if (!cookies) cookies = await container.helpers(helper).grabCookie();
-        request.headers = { ...request.headers, Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };      
+        request.headers = { ...request.headers, Cookie: cookies.map(c => `${c.name}=${c.value}`).join('; ') };
       } catch (err) {
         output.error('Can\'t fetch cookies from the current browser. Open a browser and log in before performing request');
       }
     }
 
-    it('should copy cookies from WebDriver to REST', () => {
+    test('should copy cookies from WebDriver to REST', () => {
       const config = {
         helpers: {
           WebDriver: {},
@@ -205,11 +206,11 @@ describe('Hooks tests', () => {
       }
       setSharedCookies(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.REST.onRequest');
-      expect(Config.get().helpers.REST.onRequest.toString(), fn.toString())
+      expect(Config.get()).toHaveProperty('helpers.REST.onRequest');
+      expect(Config.get().helpers.REST.onRequest.toString()).toContain(fn.toString())
     });
 
-    it('should copy cookies from Puppeteer to GraphQL and GraphQLDataFactory', () => {
+    test('should copy cookies from Puppeteer to GraphQL and GraphQLDataFactory', () => {
       const config = {
         helpers: {
           WebDriver: {},
@@ -219,16 +220,16 @@ describe('Hooks tests', () => {
       }
       setSharedCookies(true);
       Config.create(config);
-      expect(Config.get()).to.have.nested.property('helpers.GraphQL.onRequest');
-      expect(Config.get().helpers.GraphQL.onRequest.toString(), fn.toString());
-      expect(Config.get()).to.have.nested.property('helpers.GraphQLDataFactory.onRequest');
-      expect(Config.get().helpers.GraphQLDataFactory.onRequest.toString()).to.eql(fn.toString())
+      expect(Config.get()).toHaveProperty('helpers.GraphQL.onRequest');
+      expect(Config.get().helpers.GraphQL.onRequest.toString()).toEqual(fn.toString());
+      expect(Config.get()).toHaveProperty('helpers.GraphQLDataFactory.onRequest');
+      expect(Config.get().helpers.GraphQLDataFactory.onRequest.toString()).toEqual(fn.toString());
     });
   });
 
   describe('#setWindowSize', () => {
     ['Protractor', 'TestCafe', 'Nightmare', 'WebDriver','Puppeteer','Playwright'].forEach(helper => {
-      it('should set window size for ' + helper, () => {
+      test('should set window size for ' + helper, () => {
         Config.reset();
         const config = {
           helpers: {},
@@ -236,12 +237,12 @@ describe('Hooks tests', () => {
         config.helpers[helper] = {};
         setWindowSize(1900, 1000);
         Config.create(config);
-        expect(Config.get()).to.have.nested.property(`helpers.${helper}.windowSize`);
-        expect(Config.get().helpers[helper].windowSize).to.eql('1900x1000');
+        expect(Config.get()).toHaveProperty(`helpers.${helper}.windowSize`);
+        expect(Config.get().helpers[helper].windowSize).toEqual('1900x1000');
       });
     });
 
-    it('should set window size in args for Puppeteer', () => {
+    test('should set window size in args for Puppeteer', () => {
       const config = {
         helpers: {
           Puppeteer: {
@@ -253,15 +254,15 @@ describe('Hooks tests', () => {
       }
       setWindowSize(1900, 1000);
       Config.create(config);
-      expect(Config.get().helpers.Puppeteer.chrome.args).to.include('--window-size=1900,1000');
-      expect(Config.get().helpers.Puppeteer.chrome.args).to.include('some-arg');
+      expect(Config.get().helpers.Puppeteer.chrome.args).toContain('--window-size=1900,1000');
+      expect(Config.get().helpers.Puppeteer.chrome.args).toContain('some-arg');
 
     });
   });
 
   describe('#setBrowser', () => {
     ['Protractor', 'TestCafe','WebDriver','Playwright'].forEach(helper => {
-      it('should set browser to firefox for ' + helper, () => {
+      test('should set browser to firefox for ' + helper, () => {
         Config.reset();
         const config = {
           helpers: {},
@@ -269,12 +270,12 @@ describe('Hooks tests', () => {
         config.helpers[helper] = {};
         setBrowser('firefox');
         Config.create(config);
-        expect(Config.get()).to.have.nested.property(`helpers.${helper}.browser`);
-        expect(Config.get().helpers[helper].browser).to.eql('firefox');
+        expect(Config.get()).toHaveProperty(`helpers.${helper}.browser`);
+        expect(Config.get().helpers[helper].browser).toEqual('firefox');
       });
     });
 
-    it('should throw exception when browser is not available', () => {
+    test('should throw exception when browser is not available', () => {
       Config.reset();
       const config = {
         helpers: {
@@ -287,44 +288,44 @@ describe('Hooks tests', () => {
       try {
         Config.create(config);
       } catch (err) {
-        expect(err.toString()).to.contain('not supported');
+        expect(err.toString()).toContain('not supported');
         return
       }
       throw new Error('no exception thrown');
     });
-  });  
-  
+  });
+
   describe('#setTestHost', () => {
     ['Protractor', 'TestCafe','WebDriver','Playwright','Puppeteer'].forEach(helper => {
-      it('should set url for ' + helper, () => {
+      test('should set url for ' + helper, () => {
         Config.reset();
         const config = {
-          helpers: {},  
+          helpers: {},
         }
         config.helpers[helper] = {};
         setTestHost('test.com');
         Config.create(config);
-        expect(Config.get()).to.have.nested.property(`helpers.${helper}.url`);
-        expect(Config.get().helpers[helper].url).to.eql('test.com');
+        expect(Config.get()).toHaveProperty(`helpers.${helper}.url`);
+        expect(Config.get().helpers[helper].url).toEqual('test.com');
       });
     });
-  });  
+  });
 
   describe('#setCommonPlugins', () => {
-    it('create standard plugins', () => {
+    test('create standard plugins', () => {
       Config.reset();
       const config = {
         helpers: {},
       }
       setCommonPlugins();
       Config.create(config);
-      expect(Config.get()).to.have.nested.property(`plugins.screenshotOnFail`);
-      expect(Config.get()).to.have.nested.property(`plugins.tryTo`);
-      expect(Config.get()).to.have.nested.property(`plugins.retryTo`);
-      expect(Config.get()).to.have.nested.property(`plugins.eachElement`);
+      expect(Config.get()).toHaveProperty(`plugins.screenshotOnFail`);
+      expect(Config.get()).toHaveProperty(`plugins.tryTo`);
+      expect(Config.get()).toHaveProperty(`plugins.retryTo`);
+      expect(Config.get()).toHaveProperty(`plugins.eachElement`);
     });
 
-    it('should not override plugins', () => {
+    test('should not override plugins', () => {
       Config.reset();
       const config = {
         helpers: {},
@@ -335,13 +336,13 @@ describe('Hooks tests', () => {
       }
       setCommonPlugins();
       Config.create(config);
-      expect(Config.get()).to.have.nested.property(`plugins.screenshotOnFail`);
-      expect(Config.get()).to.have.nested.property(`plugins.screenshotOnFail.enabled`);
-      expect(Config.get().plugins.screenshotOnFail.enabled).to.be.false;
-      expect(Config.get()).to.have.nested.property(`plugins.tryTo`);
-      expect(Config.get()).to.have.nested.property(`plugins.retryTo`);
-      expect(Config.get()).to.have.nested.property(`plugins.eachElement`);
-      expect(Config.get()).to.have.nested.property(`plugins.otherPlugin`);
+      expect(Config.get()).toHaveProperty(`plugins.screenshotOnFail`);
+      expect(Config.get()).toHaveProperty(`plugins.screenshotOnFail.enabled`);
+      expect(Config.get().plugins.screenshotOnFail.enabled).toBeFalsy();
+      expect(Config.get()).toHaveProperty(`plugins.tryTo`);
+      expect(Config.get()).toHaveProperty(`plugins.retryTo`);
+      expect(Config.get()).toHaveProperty(`plugins.eachElement`);
+      expect(Config.get()).toHaveProperty(`plugins.otherPlugin`);
     });
   });
 

@@ -159,7 +159,7 @@ setTestHost(process.env.TEST_HOST);
 
 Please send your config hooks!
 
-If you feel that `codecept.conf.js` becomes too complicated and you know how to make it simpler, 
+If you feel that `codecept.conf.js` becomes too complicated, and you know how to make it simpler, 
 send a pull request with a config hook to solve your case.
 
 Good ideas for config hooks:
@@ -174,8 +174,8 @@ To create a custom hook follow this rules.
 2. Create a js module that exports a function.
 3. Require `config` object from `codeceptjs` package.
 4. Use `config.addHook((config) => {})` to set a hook for configuration
-5. Add a test to `index_test.js`
-6. Run `mocha index_test.js`
+5. Add a test to `index.test.js`
+6. Run `npm run test`
 
 See current hooks as examples.
 

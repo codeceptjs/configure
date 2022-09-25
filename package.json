@@ -4,7 +4,7 @@
   "description": "Set of CodeceptJS config hooks to simplify configuration",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/index_test.js",
+    "test": "jest test/index.test.js",
     "test-integration": "cd test/integration && CI=true npx codeceptjs run",
     "publish": "npm publish --access public"
   },
@@ -26,9 +26,8 @@
     "lodash.mergewith": "^4.6.2"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "codeceptjs": "^3.3.0",
-    "mocha": "^8.2.1",
+    "codeceptjs": "^3.3.5",
+    "jest": "^29.0.2",
     "puppeteer": "^2.1",
     "webdriverio": "^6.4.2"
   },

@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest test/index.test.js",
-    "test-integration": "cd test/integration && CI=true npx codeceptjs run",
-    "publish": "npm publish --access public"
+    "test-integration": "cd test/integration && CI=true npx codeceptjs run"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codecept-js/configure.git"
+    "url": "git+https://github.com/codeceptjs/configure.git"
   },
   "keywords": [
     "codeceptjs"
@@ -18,9 +17,9 @@
   "author": "Michael Bodnarchuk",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/codecept-js/configure/issues"
+    "url": "https://github.com/codeceptjs/configure/issues"
   },
-  "homepage": "https://github.com/codecept-js/configure#readme",
+  "homepage": "https://github.com/codeceptjs/configure#readme",
   "dependencies": {
     "lodash.merge": "^4.6.2",
     "lodash.mergewith": "^4.6.2"
@@ -33,5 +32,6 @@
   },
   "peerDependencies": {
     "codeceptjs": ">= 2.3.3"
-  }
+  },
+  "files": ["hooks/*", "codeceptjs.js", "deepMerge.js", "index.js", "index.d.ts"]
 }

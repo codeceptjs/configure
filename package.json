@@ -1,6 +1,6 @@
 {
   "name": "@codeceptjs/configure",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "Set of CodeceptJS config hooks to simplify configuration",
   "main": "index.js",
   "scripts": {
@@ -33,5 +33,11 @@
   "peerDependencies": {
     "codeceptjs": ">= 2.3.3"
   },
-  "files": ["hooks/*", "codeceptjs.js", "deepMerge.js", "index.js", "index.d.ts"]
+  "files": [
+    "hooks/*",
+    "codeceptjs.js",
+    "deepMerge.js",
+    "index.js",
+    "index.d.ts"
+  ]
 }

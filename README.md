@@ -20,7 +20,7 @@ Better to see once.
 
 ### setHeadlessWhen
 
-Toggle headless mode for Puppeteer, WebDriver, TestCafe, Nightmare and Playwright on condition.
+Toggle headless mode for Puppeteer, WebDriver, TestCafe and Playwright on condition.
 
 Usage:
 
@@ -44,7 +44,7 @@ exports.config = {
 }
 ```
 
-* For Puppeteer, TestCafe, Nigthmare, Playwright: it enables `show: true`.
+* For Puppeteer, TestCafe, Playwright: it enables `show: true`.
 * For WebDriver with Chrome or Firefox browser: it adds `--headless` option to chrome/firefox options inside `desiredCapabilities`.
 
 ### setHeadedWhen
@@ -118,7 +118,7 @@ exports.config = {
 
 ### setBrowser
 
-Changes browser in config for Playwright, Puppeteer, WebDriver, Protractor & TestCafe:
+Changes browser in config for Playwright, Puppeteer, WebDriver & TestCafe:
 
 ```js
 const { setBrowser } = require('@codeceptjs/configure');
@@ -147,7 +147,7 @@ exports.config = {
 
 ### setTestHost
 
-Changes url in config for Playwright, Puppeteer, WebDriver, Protractor & TestCafe:
+Changes url in config for Playwright, Puppeteer, WebDriver & TestCafe:
 
 ```js
 const { setTestHost } = require('@codeceptjs/configure');

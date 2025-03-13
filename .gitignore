@@ -64,3 +64,5 @@ test/integration/node_modules
 test/integration/output
 coverage
 
+package-lock.json
+

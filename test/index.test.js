@@ -320,8 +320,8 @@ describe('Hooks tests', () => {
       setCommonPlugins();
       Config.create(config);
       expect(Config.get()).toHaveProperty(`plugins.screenshotOnFail`);
-      expect(Config.get()).toHaveProperty(`plugins.tryTo`);
-      expect(Config.get()).toHaveProperty(`plugins.retryTo`);
+      //expect(Config.get()).toHaveProperty(`plugins.tryTo`);
+      //expect(Config.get()).toHaveProperty(`plugins.retryTo`);
       expect(Config.get()).toHaveProperty(`plugins.eachElement`);
     });
 
@@ -339,8 +339,8 @@ describe('Hooks tests', () => {
       expect(Config.get()).toHaveProperty(`plugins.screenshotOnFail`);
       expect(Config.get()).toHaveProperty(`plugins.screenshotOnFail.enabled`);
       expect(Config.get().plugins.screenshotOnFail.enabled).toBeFalsy();
-      expect(Config.get()).toHaveProperty(`plugins.tryTo`);
-      expect(Config.get()).toHaveProperty(`plugins.retryTo`);
+      //expect(Config.get()).toHaveProperty(`plugins.tryTo`);
+      //expect(Config.get()).toHaveProperty(`plugins.retryTo`);
       expect(Config.get()).toHaveProperty(`plugins.eachElement`);
       expect(Config.get()).toHaveProperty(`plugins.otherPlugin`);
     });

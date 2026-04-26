@@ -78,16 +78,15 @@ These plugins will be loaded:
 **Enabled globally**
 
 * `retryFailedStep`
-* `eachElement`
 * `screenshotOnFail`
 
 **Registered but not enabled** — activate ad-hoc via `-p <name>` on the CLI, or by setting `enabled: true` in user config:
 
-* `pauseOnFail` — pause when a step fails (`-p pauseOnFail`)
+* `pauseOn` — pause on failure / step / file / URL (`-p pauseOn:fail`, `-p pauseOn:step`, `-p pauseOn:file:tests/login_test.js`, `-p pauseOn:url:/checkout/*`)
 * `browser` — override browser helper config from CLI (`-p browser:show`, `-p browser:browser=firefox`, etc.)
-* `aiTrace` — capture AI traces
+* `aiTrace` — capture AI traces (`-p aiTrace`)
 
-Note: in CodeceptJS 4.x, `tryTo` and `retryTo` are no longer plugins — import them from `codeceptjs/effects`.
+Note: in CodeceptJS 4.x, `tryTo` / `retryTo` / `eachElement` are no longer plugins — import them from `codeceptjs/effects`.
 
 ### setSharedCookies
 

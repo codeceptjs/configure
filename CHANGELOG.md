@@ -1,6 +1,10 @@
 4.0.0-beta.3
 
-* `setCommonPlugins` now registers `browser` and `aiTrace` as discoverable plugins (not enabled by default — activate via `-p <name>` on the CLI or `enabled: true` in user config). `tryTo`/`retryTo` are no longer added; in 4.x they are imported from `codeceptjs/effects`.
+* `setCommonPlugins` aligned with CodeceptJS 4.x plugin set:
+  * Replaces `pauseOnFail` with the newer `pauseOn` plugin (registered, not enabled — activate via `-p pauseOn:fail`, `-p pauseOn:step`, `-p pauseOn:url:...`).
+  * Adds `browser` and `aiTrace` as discoverable plugins (not enabled — activate via `-p browser:...` / `-p aiTrace`).
+  * Drops `eachElement` — removed from CodeceptJS 4.x; available as `eachElement` import from `codeceptjs/effects`.
+  * Drops `tryTo`/`retryTo` plugin entries — also moved to `codeceptjs/effects` in 4.x.
 
 4.0.0
 

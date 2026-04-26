@@ -6,12 +6,11 @@ export default function () {
 
     // Enabled globally
     cfg.plugins.retryFailedStep = cfg.plugins.retryFailedStep || { enabled: true }
-    cfg.plugins.eachElement = cfg.plugins.eachElement || { enabled: true }
     cfg.plugins.screenshotOnFail = cfg.plugins.screenshotOnFail || {}
 
     // Registered but not enabled — activate via `-p <name>` on the CLI or by
     // setting `enabled: true` in user config.
-    cfg.plugins.pauseOnFail = cfg.plugins.pauseOnFail || {}
+    cfg.plugins.pauseOn = cfg.plugins.pauseOn || {}
     cfg.plugins.browser = cfg.plugins.browser || {}
     cfg.plugins.aiTrace = cfg.plugins.aiTrace || {}
   })

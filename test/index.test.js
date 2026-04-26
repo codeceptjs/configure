@@ -220,6 +220,28 @@ describe('Hooks tests', () => {
       assert.equal(Config.get().helpers.REST.video, undefined)
     })
 
+    test('url routes through setTestHost', () => {
+      Config.reset()
+      const config = { helpers: { Playwright: {}, WebDriver: {}, REST: {} } }
+      setBrowserConfig({ url: 'https://staging.example.com' })
+      Config.create(config)
+      assert.equal(Config.get().helpers.Playwright.url, 'https://staging.example.com')
+      assert.equal(Config.get().helpers.WebDriver.url, 'https://staging.example.com')
+      // setTestHost only touches the browser helper list; REST is unaffected
+      assert.equal(Config.get().helpers.REST.url, undefined)
+    })
+
+    test('undefined values do not overwrite existing helper config', () => {
+      Config.reset()
+      const config = { helpers: { Playwright: { url: 'https://kept.example.com', waitForTimeout: 5000 } } }
+      // simulate process.env.URL and process.env.TIMEOUT being unset
+      setBrowserConfig({ url: undefined, waitForTimeout: undefined, video: false })
+      Config.create(config)
+      assert.equal(Config.get().helpers.Playwright.url, 'https://kept.example.com')
+      assert.equal(Config.get().helpers.Playwright.waitForTimeout, 5000)
+      assert.equal(Config.get().helpers.Playwright.video, false)
+    })
+
     test('combined options applied in one call', () => {
       Config.reset()
       const config = { helpers: { Playwright: { show: false } } }

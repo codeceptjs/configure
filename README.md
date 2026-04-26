@@ -75,12 +75,19 @@ setCommonPlugins();
 
 These plugins will be loaded:
 
-* tryTo (enabled globally)
-* retryFailedStep (enabled globally)
-* retryTo (enabled globally)
-* eachElement (enabled globally)
-* pauseOnFail (disabled, should be turned on when needed)
-* screenshotOnFail (enable globally)
+**Enabled globally**
+
+* `retryFailedStep`
+* `eachElement`
+* `screenshotOnFail`
+
+**Registered but not enabled** — activate ad-hoc via `-p <name>` on the CLI, or by setting `enabled: true` in user config:
+
+* `pauseOnFail` — pause when a step fails (`-p pauseOnFail`)
+* `browser` — override browser helper config from CLI (`-p browser:show`, `-p browser:browser=firefox`, etc.)
+* `aiTrace` — capture AI traces
+
+Note: in CodeceptJS 4.x, `tryTo` and `retryTo` are no longer plugins — import them from `codeceptjs/effects`.
 
 ### setSharedCookies
 

@@ -1,3 +1,7 @@
+4.0.0-beta.3
+
+* `setCommonPlugins` now registers `browser` and `aiTrace` as discoverable plugins (not enabled by default — activate via `-p <name>` on the CLI or `enabled: true` in user config). `tryTo`/`retryTo` are no longer added; in 4.x they are imported from `codeceptjs/effects`.
+
 4.0.0
 
 * ESM-only release targeting CodeceptJS 4.x. Convert package + all hooks + bridge to native ESM (`type: module`).

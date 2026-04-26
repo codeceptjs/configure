@@ -260,8 +260,17 @@ describe('Hooks tests', () => {
       const config = { helpers: {} }
       setCommonPlugins()
       Config.create(config)
+      // enabled globally
       assert.ok(Config.get().plugins.screenshotOnFail)
       assert.ok(Config.get().plugins.eachElement)
+      assert.equal(Config.get().plugins.eachElement.enabled, true)
+      assert.equal(Config.get().plugins.retryFailedStep.enabled, true)
+      // registered but not enabled
+      assert.ok(Config.get().plugins.pauseOnFail)
+      assert.ok(Config.get().plugins.browser)
+      assert.equal(Config.get().plugins.browser.enabled, undefined)
+      assert.ok(Config.get().plugins.aiTrace)
+      assert.equal(Config.get().plugins.aiTrace.enabled, undefined)
     })
 
     test('should not override plugins', () => {

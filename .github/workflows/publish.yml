@@ -44,4 +44,12 @@ jobs:
         run: npm version "${{ github.event.release.tag_name }}" --no-git-tag-version
 
       - name: Publish to npm
-        run: npm publish --provenance --access public
+        run: |
+          VERSION="${{ github.event.release.tag_name }}"
+          if [[ "$VERSION" == *-* ]]; then
+            # prerelease (e.g. 4.0.0-beta.1, 4.0.0-rc.2) — derive dist-tag from label
+            TAG=$(echo "$VERSION" | sed -E 's/^[^-]+-([a-zA-Z]+).*/\1/')
+            npm publish --provenance --access public --tag "$TAG"
+          else
+            npm publish --provenance --access public
+          fi

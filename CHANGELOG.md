@@ -1,3 +1,12 @@
+4.0.0
+
+* ESM-only release targeting CodeceptJS 4.x. Convert package + all hooks + bridge to native ESM (`type: module`).
+* Fix Config singleton sharing: bridge now imports `codeceptjs` via ESM, so hooks register on the host's Config instance instead of a stale CJS-resolved copy.
+* Mark the `codeceptjs` peer dependency as optional so npm doesn't pull a parallel 3.x copy alongside a 4.x host.
+* Drop the `tryTo` / `retryTo` plugin enable in `setCommonPlugins` — in CodeceptJS 4 those are imported from `codeceptjs/effects`, not enabled as plugins.
+* Tests rewritten on Node's built-in `node:test` + `node:assert` (no jest).
+* Engines: Node >=18.
+
 0.8.0
 
 * Added `setCommonPlugins` hook

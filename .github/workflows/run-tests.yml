@@ -3,23 +3,28 @@ name: Run Tests
 on:
   push:
     branches:
+      - 4.x
       - master
       - main
   pull_request:
     branches:
       - '**'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build:
-
+  unit-tests:
+    name: Unit tests
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup nodejs
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 22
-      - run: npm i
-      - run: npm run test
-      - run: npm run test-integration
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm test

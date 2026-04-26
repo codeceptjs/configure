@@ -4,7 +4,7 @@ Configuration hook helps you update CodeceptJS configuration at ease.
 
 Those hooks are expected to simplify configuration for common use cases.
 
-**Requires CodeceptJS >= 4.0.0** (this is the ESM-only `2.x` line targeting CodeceptJS 4. For CodeceptJS 3.x use `@codeceptjs/configure@^1`.)
+**Requires CodeceptJS >= 4.0.0** — `4.x` is the ESM-only line that ships alongside CodeceptJS 4. For CodeceptJS 3.x use `@codeceptjs/configure@^1`.
 
 ## Install it
 

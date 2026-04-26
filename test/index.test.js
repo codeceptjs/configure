@@ -220,14 +220,13 @@ describe('Hooks tests', () => {
       assert.equal(Config.get().helpers.REST.video, undefined)
     })
 
-    test('url routes through setTestHost', () => {
+    test('url is merged onto every browser helper, not REST/etc', () => {
       Config.reset()
       const config = { helpers: { Playwright: {}, WebDriver: {}, REST: {} } }
       setBrowserConfig({ url: 'https://staging.example.com' })
       Config.create(config)
       assert.equal(Config.get().helpers.Playwright.url, 'https://staging.example.com')
       assert.equal(Config.get().helpers.WebDriver.url, 'https://staging.example.com')
-      // setTestHost only touches the browser helper list; REST is unaffected
       assert.equal(Config.get().helpers.REST.url, undefined)
     })
 

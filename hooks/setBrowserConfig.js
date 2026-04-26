@@ -3,26 +3,26 @@ import setBrowser from './setBrowser.js'
 import setWindowSize from './setWindowSize.js'
 import setHeadedWhen from './setHeadedWhen.js'
 import setHeadlessWhen from './setHeadlessWhen.js'
-import setTestHost from './setTestHost.js'
 
 const BROWSER_HELPERS = ['Playwright', 'Puppeteer', 'WebDriver', 'Appium']
 
 /**
  * Apply a bag of browser helper overrides in a single call. Dispatches the
- * options that have dedicated hooks (browser, show, windowSize, url) through
- * them — so per-helper key translation (e.g. Puppeteer `product` vs
- * Playwright `browser`) and capability-arg surgery (WebDriver `--headless`
- * chrome args) are handled correctly. Anything else is shallow-merged onto
- * every browser helper present in config; keys whose value is `undefined`
- * are skipped so unset env vars don't clobber existing config.
+ * options that have dedicated hooks (browser, show, windowSize) through them
+ * — those need per-helper key translation (Puppeteer wants `product`, not
+ * `browser`) or capability-arg surgery (WebDriver `--headless`,
+ * chromium `--window-size`). Everything else (including plain keys like
+ * `url`, `waitForTimeout`, `video`, etc.) is shallow-merged onto every
+ * browser helper present in config. Keys whose value is `undefined` are
+ * skipped so unset env vars don't clobber existing helper config.
  *
  * @example
  *   setBrowserConfig({
  *     browser: process.env.BROWSER,        // -> setBrowser
  *     show: !process.env.HEADLESS,         // -> setHeadedWhen / setHeadlessWhen
  *     windowSize: '1280x720',              // -> setWindowSize
- *     url: process.env.URL,                // -> setTestHost
- *     waitForTimeout: 10000,               // -> Object.assign onto each helper
+ *     url: process.env.URL,                // -> merged onto each helper
+ *     waitForTimeout: 10000,               // -> merged onto each helper
  *   })
  *
  * @param {object} [opts]
@@ -30,7 +30,7 @@ const BROWSER_HELPERS = ['Playwright', 'Puppeteer', 'WebDriver', 'Appium']
 export default function setBrowserConfig(opts) {
   if (!opts || typeof opts !== 'object') return
 
-  const { browser, show, windowSize, url, ...rest } = opts
+  const { browser, show, windowSize, ...rest } = opts
 
   if (browser !== undefined && browser !== null && browser !== '') {
     setBrowser(browser)
@@ -43,8 +43,6 @@ export default function setBrowserConfig(opts) {
     const m = /^(\d+)x(\d+)$/.exec(String(windowSize))
     if (m) setWindowSize(Number(m[1]), Number(m[2]))
   }
-
-  if (url) setTestHost(url)
 
   // skip undefined values so unset env vars don't overwrite existing helper config
   const merge = {}

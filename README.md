@@ -147,7 +147,7 @@ exports.config = {
 
 ### setBrowserConfig
 
-Apply a bag of browser-helper overrides in one call. Routes `browser`, `show`, `windowSize` and `url` through their dedicated hooks (so per-helper key translation like Puppeteer's `product` vs Playwright's `browser`, and WebDriver `--headless` capability args, are handled correctly). Any other key is shallow-merged onto every browser helper present in config. Keys whose value is `undefined` are skipped — so passing an unset env var doesn't clobber existing config.
+Apply a bag of browser-helper overrides in one call. Three keys need real per-helper translation and are routed through their dedicated hooks: `browser` (Puppeteer wants `product`, not `browser`), `show` (WebDriver needs `--headless` injected into chrome/firefox capability args), and `windowSize` (Puppeteer/Playwright also need `--window-size=W,H` chrome args). Everything else — `url`, `waitForTimeout`, `video`, etc. — is shallow-merged onto every browser helper present in config. Keys whose value is `undefined` are skipped so passing an unset env var doesn't clobber existing config.
 
 ```js
 import { setBrowserConfig } from '@codeceptjs/configure'
@@ -156,7 +156,7 @@ setBrowserConfig({
   browser: process.env.BROWSER,        // -> setBrowser
   show: !process.env.HEADLESS,         // -> setHeadedWhen / setHeadlessWhen
   windowSize: '1280x720',              // -> setWindowSize
-  url: process.env.URL,                // -> setTestHost
+  url: process.env.URL,                // -> merged onto each helper
   waitForTimeout: 10000,               // -> merged onto each helper
 })
 ```

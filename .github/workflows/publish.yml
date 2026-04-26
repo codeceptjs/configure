@@ -18,8 +18,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
 
+      - run: npm install -g npm@latest
       - run: npm install
       - run: npm test
 
@@ -33,11 +34,11 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm install
       - run: npm install -g npm@latest
+      - run: npm install
 
       - name: Set package version from release tag
         run: npm version "${{ github.event.release.tag_name }}" --no-git-tag-version

@@ -7,6 +7,7 @@ import {
   setSharedCookies,
   setWindowSize,
   setBrowser,
+  setBrowserConfig,
   setTestHost,
   setCommonPlugins,
 } from '../index.js'
@@ -159,6 +160,77 @@ describe('Hooks tests', () => {
         assert.equal(Config.get().helpers[helper].url, 'test.com')
       })
     }
+  })
+
+  describe('#setBrowserConfig', () => {
+    test('no-ops when called with no args / non-object', () => {
+      Config.reset()
+      const config = { helpers: { Playwright: { show: true } } }
+      setBrowserConfig()
+      setBrowserConfig(null)
+      Config.create(config)
+      assert.equal(Config.get().helpers.Playwright.show, true)
+    })
+
+    test('routes browser through setBrowser (Puppeteer gets product, not browser)', () => {
+      Config.reset()
+      const config = { helpers: { Puppeteer: {}, Playwright: {} } }
+      setBrowserConfig({ browser: 'firefox' })
+      Config.create(config)
+      assert.equal(Config.get().helpers.Puppeteer.product, 'firefox')
+      assert.equal(Config.get().helpers.Puppeteer.browser, undefined)
+      assert.equal(Config.get().helpers.Playwright.browser, 'firefox')
+    })
+
+    test('show:true -> headed; show:false -> headless on Playwright/Puppeteer', () => {
+      Config.reset()
+      let config = { helpers: { Playwright: { show: false }, Puppeteer: { show: false } } }
+      setBrowserConfig({ show: true })
+      Config.create(config)
+      assert.equal(Config.get().helpers.Playwright.show, true)
+      assert.equal(Config.get().helpers.Puppeteer.show, true)
+
+      Config.reset()
+      config = { helpers: { Playwright: { show: true }, WebDriver: { browser: 'chrome' } } }
+      setBrowserConfig({ show: false })
+      Config.create(config)
+      assert.equal(Config.get().helpers.Playwright.show, false)
+      assert.ok(Config.get().helpers.WebDriver.desiredCapabilities.chromeOptions.args.includes('--headless'))
+    })
+
+    test('windowSize string is parsed and setWindowSize fires', () => {
+      Config.reset()
+      const config = { helpers: { Playwright: {}, WebDriver: {} } }
+      setBrowserConfig({ windowSize: '1280x720' })
+      Config.create(config)
+      assert.equal(Config.get().helpers.Playwright.windowSize, '1280x720')
+      assert.ok(Config.get().helpers.Playwright.chromium.args.includes('--window-size=1280,720'))
+      assert.equal(Config.get().helpers.WebDriver.windowSize, '1280x720')
+    })
+
+    test('extra keys are shallow-merged onto every browser helper', () => {
+      Config.reset()
+      const config = { helpers: { Playwright: {}, Puppeteer: {}, WebDriver: {}, REST: {} } }
+      setBrowserConfig({ video: false, waitForTimeout: 9000 })
+      Config.create(config)
+      assert.equal(Config.get().helpers.Playwright.video, false)
+      assert.equal(Config.get().helpers.Playwright.waitForTimeout, 9000)
+      assert.equal(Config.get().helpers.Puppeteer.video, false)
+      assert.equal(Config.get().helpers.WebDriver.waitForTimeout, 9000)
+      assert.equal(Config.get().helpers.REST.video, undefined)
+    })
+
+    test('combined options applied in one call', () => {
+      Config.reset()
+      const config = { helpers: { Playwright: { show: false } } }
+      setBrowserConfig({ browser: 'webkit', show: true, windowSize: '800x600', video: true })
+      Config.create(config)
+      const pw = Config.get().helpers.Playwright
+      assert.equal(pw.browser, 'webkit')
+      assert.equal(pw.show, true)
+      assert.equal(pw.windowSize, '800x600')
+      assert.equal(pw.video, true)
+    })
   })
 
   describe('#setCommonPlugins', () => {

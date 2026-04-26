@@ -1,6 +1,7 @@
 4.0.0
 
 * ESM-only release targeting CodeceptJS 4.x. Convert package + all hooks + bridge to native ESM (`type: module`).
+* Added `setBrowserConfig({ browser, show, windowSize, ... })` — universal helper that dispatches options through the right primitive (so Puppeteer gets `product`, Playwright gets `browser`, WebDriver gets `--headless` chrome args, etc.) and shallow-merges any extra keys onto every browser helper.
 * Fix Config singleton sharing: bridge now imports `codeceptjs` via ESM, so hooks register on the host's Config instance instead of a stale CJS-resolved copy.
 * Mark the `codeceptjs` peer dependency as optional so npm doesn't pull a parallel 3.x copy alongside a 4.x host.
 * Drop the `tryTo` / `retryTo` plugin enable in `setCommonPlugins` — in CodeceptJS 4 those are imported from `codeceptjs/effects`, not enabled as plugins.

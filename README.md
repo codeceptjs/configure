@@ -145,6 +145,21 @@ exports.config = {
 }
 ```
 
+### setBrowserConfig
+
+Apply a bag of browser-helper overrides in one call. Routes `browser`, `show`, and `windowSize` through their dedicated hooks (so per-helper key translation like Puppeteer's `product` vs Playwright's `browser`, and WebDriver `--headless` capability args, are handled correctly). Any other key is shallow-merged onto every browser helper present in config.
+
+```js
+import { setBrowserConfig } from '@codeceptjs/configure'
+
+setBrowserConfig({
+  browser: process.env.BROWSER,        // -> setBrowser
+  show: !process.env.HEADLESS,         // -> setHeadedWhen / setHeadlessWhen
+  windowSize: '1280x720',              // -> setWindowSize
+  waitForTimeout: 10000,               // -> merged onto each helper
+})
+```
+
 ### setTestHost
 
 Changes url in config for Playwright, Puppeteer, WebDriver & TestCafe:

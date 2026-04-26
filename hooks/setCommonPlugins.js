@@ -1,21 +1,12 @@
-const { config } = require('../codeceptjs');
+import { config } from '../codeceptjs.js'
 
-module.exports = function() {
-
+export default function () {
   config.addHook(cfg => {
-    if (!cfg.plugins) cfg.plugins = {};
+    if (!cfg.plugins) cfg.plugins = {}
 
-    try {
-      require('codeceptjs/effects')
-    } catch (err) {
-      console.log(err.message);
-      cfg.plugins.tryTo = cfg.plugins.tryTo || { enabled: true };
-      cfg.plugins.retryTo = cfg.plugins.retryTo || { enabled: true };
-    }
-
-    cfg.plugins.retryFailedStep = cfg.plugins.retryFailedStep || { enabled: true };
-    cfg.plugins.eachElement = cfg.plugins.eachElement || { enabled: true };
-    cfg.plugins.pauseOnFail = cfg.plugins.pauseOnFail || {};
-    cfg.plugins.screenshotOnFail = cfg.plugins.screenshotOnFail || {};
-  });
+    cfg.plugins.retryFailedStep = cfg.plugins.retryFailedStep || { enabled: true }
+    cfg.plugins.eachElement = cfg.plugins.eachElement || { enabled: true }
+    cfg.plugins.pauseOnFail = cfg.plugins.pauseOnFail || {}
+    cfg.plugins.screenshotOnFail = cfg.plugins.screenshotOnFail || {}
+  })
 }

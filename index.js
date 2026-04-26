@@ -1,9 +1,7 @@
-module.exports = {
-  setHeadlessWhen: require('./hooks/setHeadlessWhen'),
-  setHeadedWhen: require('./hooks/setHeadedWhen'),
-  setSharedCookies: require('./hooks/setSharedCookies'),
-  setWindowSize: require('./hooks/setWindowSize'),
-  setBrowser: require('./hooks/setBrowser'),
-  setTestHost: require('./hooks/setTestHost'),
-  setCommonPlugins: require('./hooks/setCommonPlugins'),
-}
+export { default as setHeadlessWhen } from './hooks/setHeadlessWhen.js'
+export { default as setHeadedWhen } from './hooks/setHeadedWhen.js'
+export { default as setSharedCookies } from './hooks/setSharedCookies.js'
+export { default as setWindowSize } from './hooks/setWindowSize.js'
+export { default as setBrowser } from './hooks/setBrowser.js'
+export { default as setTestHost } from './hooks/setTestHost.js'
+export { default as setCommonPlugins } from './hooks/setCommonPlugins.js'

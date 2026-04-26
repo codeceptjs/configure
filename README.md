@@ -4,7 +4,7 @@ Configuration hook helps you update CodeceptJS configuration at ease.
 
 Those hooks are expected to simplify configuration for common use cases.
 
-**Requires CodeceptJS >= 2.3.3**
+**Requires CodeceptJS >= 4.0.0** (this is the ESM-only `2.x` line targeting CodeceptJS 4. For CodeceptJS 3.x use `@codeceptjs/configure@^1`.)
 
 ## Install it
 
@@ -26,7 +26,7 @@ Usage:
 
 ```js
 // in codecept.conf.js
-const { setHeadlessWhen } = require('@codeceptjs/configure');
+import { setHeadlessWhen } from '@codeceptjs/configure'
 
 // enable headless when env var HEADLESS exists
 // Use it like:
@@ -53,7 +53,7 @@ Opposite to [setHeadlessWhen](#setHeadlessWhen). Forces window mode for running 
 
 ```js
 // in codecept.conf.js
-const { setHeadlessWhen } = require('@codeceptjs/configure');
+import { setHeadlessWhen } from '@codeceptjs/configure'
 
 // enable window mode when env var DEV exists
 // Use it like:
@@ -68,7 +68,7 @@ The list of plugins can be updated from version to version so this hook ensures 
 
 ```js
 // in codecept.conf.js
-const { setCommonPlugins } = require('@codeceptjs/configure');
+import { setCommonPlugins } from '@codeceptjs/configure'
 
 setCommonPlugins();
 ```
@@ -91,7 +91,7 @@ This function obtains cookies from an active session in WebDriver or Puppeteer h
 
 ```js
 // in codecept.conf.js
-const { setSharedCookies } = require('@codeceptjs/configure');
+import { setSharedCookies } from '@codeceptjs/configure'
 
 // share cookies between browser helpers and REST/GraphQL
 setSharedCookies();
@@ -121,7 +121,7 @@ exports.config = {
 Changes browser in config for Playwright, Puppeteer, WebDriver & TestCafe:
 
 ```js
-const { setBrowser } = require('@codeceptjs/configure');
+import { setBrowser } from '@codeceptjs/configure'
 
 setBrowser(process.env.BROWSER);
 ```
@@ -134,7 +134,7 @@ Usage: `setWindowSize(width, height)`.
 
 ```js
 // in codecept.conf.js
-const { setWindowSize } = require('@codeceptjs/configure');
+import { setWindowSize } from '@codeceptjs/configure'
 
 setWindowSize(1600, 1200);
 
@@ -150,7 +150,7 @@ exports.config = {
 Changes url in config for Playwright, Puppeteer, WebDriver & TestCafe:
 
 ```js
-const { setTestHost } = require('@codeceptjs/configure');
+import { setTestHost } from '@codeceptjs/configure'
 
 setTestHost(process.env.TEST_HOST);
 ```

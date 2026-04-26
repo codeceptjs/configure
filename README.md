@@ -1,4 +1,4 @@
-## CodeceptJS Configuration Hooks [![Build Status](https://travis-ci.org/codeceptjs/configure.svg?branch=master)](https://travis-ci.org/codeceptjs/configure)
+## CodeceptJS Configuration Hooks [![Run Tests](https://github.com/codeceptjs/configure/actions/workflows/run-tests.yml/badge.svg?branch=4.x)](https://github.com/codeceptjs/configure/actions/workflows/run-tests.yml)
 
 Configuration hook helps you update CodeceptJS configuration at ease.
 

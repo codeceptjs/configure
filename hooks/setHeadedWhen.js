@@ -11,12 +11,6 @@ export default function (when) {
     if (cfg.helpers.Playwright) {
       cfg.helpers.Playwright.show = true
     }
-    if (cfg.helpers.Nightmare) {
-      cfg.helpers.Nightmare.show = true
-    }
-    if (cfg.helpers.TestCafe) {
-      cfg.helpers.TestCafe.show = true
-    }
     if (cfg.helpers.WebDriver) {
       if (cfg.helpers.WebDriver.browser === 'chrome') {
         if (

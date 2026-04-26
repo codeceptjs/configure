@@ -13,15 +13,8 @@ export default function (browser) {
       checkAllowedBrowser('Playwright', ['chromium', 'webkit', 'firefox'])
       cfg.helpers.Playwright.browser = browser
     }
-    if (cfg.helpers.TestCafe) {
-      checkAllowedBrowser('TestCafe', ['chromium', 'chrome', 'chrome-canary', 'ie', 'edge', 'firefox', 'opera', 'safari'])
-      cfg.helpers.TestCafe.browser = browser
-    }
     if (cfg.helpers.WebDriver) {
       cfg.helpers.WebDriver.browser = browser
-    }
-    if (cfg.helpers.Protractor) {
-      cfg.helpers.Protractor.browser = browser
     }
   })
 

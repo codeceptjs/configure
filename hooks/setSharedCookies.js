@@ -1,6 +1,6 @@
 import { container, config, event, output } from '../codeceptjs.js'
 
-const browserHelpers = ['WebDriver', 'Protractor', 'Playwright', 'Puppeteer', 'TestCafe', 'Nightmare']
+const browserHelpers = ['WebDriver', 'Playwright', 'Puppeteer']
 
 export default function () {
   config.addHook(cfg => {

@@ -4,7 +4,7 @@ import setWindowSize from './setWindowSize.js'
 import setHeadedWhen from './setHeadedWhen.js'
 import setHeadlessWhen from './setHeadlessWhen.js'
 
-const BROWSER_HELPERS = ['Playwright', 'Puppeteer', 'WebDriver', 'Appium', 'TestCafe', 'Protractor', 'Nightmare']
+const BROWSER_HELPERS = ['Playwright', 'Puppeteer', 'WebDriver', 'Appium']
 
 /**
  * Apply a bag of browser helper overrides in a single call. Dispatches the

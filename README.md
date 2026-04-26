@@ -20,7 +20,7 @@ Better to see once.
 
 ### setHeadlessWhen
 
-Toggle headless mode for Puppeteer, WebDriver, TestCafe and Playwright on condition.
+Toggle headless mode for Puppeteer, WebDriver and Playwright on condition.
 
 Usage:
 
@@ -37,14 +37,14 @@ setHeadlessWhen(process.env.HEADLESS);
 exports.config = {
   helpers: {
     // standard config goes here
-    WebDriver: {} 
+    WebDriver: {}
     // or Puppeteer
-    // or TestCafe
+    // or Playwright
   }
 }
 ```
 
-* For Puppeteer, TestCafe, Playwright: it enables `show: true`.
+* For Puppeteer, Playwright: it enables `show: true`.
 * For WebDriver with Chrome or Firefox browser: it adds `--headless` option to chrome/firefox options inside `desiredCapabilities`.
 
 ### setHeadedWhen
@@ -102,7 +102,7 @@ exports.config = {
       // standard config goes here      
     },
     // or Puppeteer
-    // or TestCafe,
+    // or Playwright,
     REST: {
       // standard config goes here      
       // onRequest: <= will be set by hook
@@ -118,7 +118,7 @@ exports.config = {
 
 ### setBrowser
 
-Changes browser in config for Playwright, Puppeteer, WebDriver & TestCafe:
+Changes browser in config for Playwright, Puppeteer and WebDriver:
 
 ```js
 import { setBrowser } from '@codeceptjs/configure'
@@ -162,7 +162,7 @@ setBrowserConfig({
 
 ### setTestHost
 
-Changes url in config for Playwright, Puppeteer, WebDriver & TestCafe:
+Changes url in config for Playwright, Puppeteer, WebDriver and Appium:
 
 ```js
 import { setTestHost } from '@codeceptjs/configure'
@@ -181,7 +181,7 @@ Good ideas for config hooks:
 
 * Setting the same window size for all browser helpers.
 * Configuring `run-multiple`
-* Changing browser in WebDriver or Protractor depending on environment variable.
+* Changing browser in WebDriver depending on environment variable.
 
 To create a custom hook follow this rules.
 

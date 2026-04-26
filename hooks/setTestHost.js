@@ -1,6 +1,6 @@
 import { config } from '../codeceptjs.js'
 
-const supportedHelpers = ['Playwright', 'WebDriver', 'Puppeteer', 'Appium', 'TestCafe', 'Protractor', 'Nightmare']
+const supportedHelpers = ['Playwright', 'WebDriver', 'Puppeteer', 'Appium']
 
 export default function (url) {
   config.addHook(cfg => {

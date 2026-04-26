@@ -109,7 +109,7 @@ describe('Hooks tests', () => {
   })
 
   describe('#setWindowSize', () => {
-    for (const helper of ['Protractor', 'TestCafe', 'Nightmare', 'WebDriver', 'Puppeteer', 'Playwright']) {
+    for (const helper of ['WebDriver', 'Puppeteer', 'Playwright']) {
       test('should set window size for ' + helper, () => {
         Config.reset()
         const config = { helpers: {} }
@@ -130,7 +130,7 @@ describe('Hooks tests', () => {
   })
 
   describe('#setBrowser', () => {
-    for (const helper of ['Protractor', 'TestCafe', 'WebDriver', 'Playwright']) {
+    for (const helper of ['WebDriver', 'Playwright']) {
       test('should set browser to firefox for ' + helper, () => {
         Config.reset()
         const config = { helpers: {} }
@@ -150,7 +150,7 @@ describe('Hooks tests', () => {
   })
 
   describe('#setTestHost', () => {
-    for (const helper of ['Protractor', 'TestCafe', 'WebDriver', 'Playwright', 'Puppeteer']) {
+    for (const helper of ['WebDriver', 'Playwright', 'Puppeteer', 'Appium']) {
       test('should set url for ' + helper, () => {
         Config.reset()
         const config = { helpers: {} }

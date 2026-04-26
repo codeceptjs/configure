@@ -12,12 +12,6 @@ export default function (when) {
     if (cfg.helpers.Playwright) {
       cfg.helpers.Playwright.show = false
     }
-    if (cfg.helpers.Nightmare) {
-      cfg.helpers.Nightmare.show = false
-    }
-    if (cfg.helpers.TestCafe) {
-      cfg.helpers.TestCafe.show = false
-    }
     if (cfg.helpers.WebDriver) {
       if (cfg.helpers.WebDriver.browser === 'chrome') {
         cfg.helpers.WebDriver.desiredCapabilities = merge(

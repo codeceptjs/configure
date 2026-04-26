@@ -26,15 +26,6 @@ export default function (width, height) {
       cfg.helpers.Playwright.windowSize = `${width}x${height}`
     }
 
-    if (cfg.helpers.Protractor) {
-      cfg.helpers.Protractor.windowSize = `${width}x${height}`
-    }
-    if (cfg.helpers.Nightmare) {
-      cfg.helpers.Nightmare.windowSize = `${width}x${height}`
-    }
-    if (cfg.helpers.TestCafe) {
-      cfg.helpers.TestCafe.windowSize = `${width}x${height}`
-    }
     if (cfg.helpers.WebDriver) {
       cfg.helpers.WebDriver.windowSize = `${width}x${height}`
     }

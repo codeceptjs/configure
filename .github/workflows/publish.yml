@@ -41,7 +41,7 @@ jobs:
       - run: npm install
 
       - name: Set package version from release tag
-        run: npm version "${{ github.event.release.tag_name }}" --no-git-tag-version
+        run: npm version "${{ github.event.release.tag_name }}" --no-git-tag-version --allow-same-version
 
       - name: Publish to npm
         run: |

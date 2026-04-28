@@ -1,6 +1,13 @@
 import { test, describe, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
-import { config as Config, output, container } from 'codeceptjs'
+import codeceptjs, { config as Config, output, container, event } from 'codeceptjs'
+
+// In a real codecept run the framework sets globalThis.codeceptjs from
+// lib/host.js so that companion packages can reach back into the runner
+// without doing a top-level `import 'codeceptjs'`. Tests don't go through
+// the runner, so we register the same handle ourselves.
+globalThis.codeceptjs = codeceptjs ?? { config: Config, output, container, event }
+
 import {
   setHeadlessWhen,
   setHeadedWhen,
